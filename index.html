@@ -1,792 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CDB BioAI | Explainable Biomedical Intelligence</title>
+  <meta charset="UTF-8">
+  <title>CDB Scientific | AI & Systems Biology</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
   <style>
-    :root {
-      --bg: #070b14;
-      --bg-soft: #0d1320;
-      --panel: rgba(13, 19, 32, 0.88);
-      --panel-2: rgba(17, 24, 39, 0.94);
-      --line: rgba(140, 196, 255, 0.18);
-      --text: #eef4ff;
-      --muted: #9fb1c9;
-      --accent: #89d3ff;
-      --accent-2: #5ca7ff;
-      --glow: 0 0 30px rgba(108, 184, 255, 0.18);
-      --radius: 22px;
-      --max: 1220px;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at 20% 20%, rgba(73, 140, 255, 0.18), transparent 25%),
-        radial-gradient(circle at 80% 10%, rgba(87, 205, 255, 0.16), transparent 20%),
-        radial-gradient(circle at 70% 80%, rgba(57, 94, 179, 0.16), transparent 28%),
-        linear-gradient(180deg, #04070d 0%, #070b14 100%);
-      line-height: 1.5;
+      font-family: Arial, sans-serif;
+      background: #0b0f1a;
+      color: #ffffff;
     }
 
-    a { color: inherit; text-decoration: none; }
-    .container { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
-
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(18px);
-      background: rgba(4, 8, 15, 0.8);
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: auto;
+      padding: 40px 0;
     }
 
-    .nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      min-height: 84px;
-      gap: 20px;
-    }
-
-    .brand {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .brand-mark {
-      font-size: 2.2rem;
-      font-weight: 300;
-      letter-spacing: 0.06em;
-      color: #d8ebff;
-    }
-
-    .brand-sub {
-      font-size: 0.78rem;
-      color: var(--muted);
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-      color: #dfe9f8;
-    }
-
-    .nav-links a { opacity: 0.9; }
-    .nav-links a:hover { opacity: 1; color: var(--accent); }
-
-    .nav-cta {
-      padding: 12px 20px;
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 14px;
-      transition: 0.2s ease;
-    }
-
-    .nav-cta:hover {
-      border-color: rgba(137, 211, 255, 0.6);
-      box-shadow: var(--glow);
-    }
-
-    .hero {
-      position: relative;
-      overflow: hidden;
-      padding: 96px 0 84px;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(90deg, rgba(4,7,13,0.92) 0%, rgba(4,7,13,0.78) 45%, rgba(4,7,13,0.38) 100%),
-        radial-gradient(circle at 70% 35%, rgba(124, 198, 255, 0.2), transparent 22%),
-        repeating-linear-gradient(120deg, rgba(133, 192, 255, 0.06) 0 2px, transparent 2px 78px);
-      pointer-events: none;
-    }
-
-    .hero-grid {
-      position: relative;
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 34px;
-      align-items: end;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 18px;
-      padding: 8px 14px;
-      background: rgba(137, 211, 255, 0.09);
-      border: 1px solid rgba(137, 211, 255, 0.16);
-      border-radius: 999px;
-      color: #cfe8ff;
-      font-size: 0.85rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
+    h1, h2 {
+      color: #ffffff;
     }
 
     h1 {
-      margin: 0 0 18px;
-      font-size: clamp(2.7rem, 7vw, 5.2rem);
-      line-height: 0.98;
-      letter-spacing: -0.04em;
-      max-width: 760px;
+      font-size: 2.8em;
     }
 
-    .hero p.lead {
-      margin: 0 0 30px;
-      max-width: 680px;
-      font-size: 1.15rem;
-      color: var(--muted);
+    h2 {
+      margin-top: 60px;
+      font-size: 1.8em;
+      border-bottom: 1px solid #2a2f45;
+      padding-bottom: 10px;
     }
 
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      margin-bottom: 36px;
+    p {
+      color: #cbd5e1;
+      line-height: 1.6;
     }
 
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 14px 22px;
-      border-radius: 14px;
-      font-weight: 600;
-      border: 1px solid transparent;
-      transition: 0.2s ease;
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
     }
 
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
-      color: #04101b;
-      box-shadow: 0 16px 40px rgba(92, 167, 255, 0.2);
-    }
-
-    .btn-secondary {
-      background: rgba(255,255,255,0.03);
-      border-color: rgba(255,255,255,0.12);
-      color: var(--text);
-    }
-
-    .btn:hover { transform: translateY(-1px); }
-
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: 16px;
-    }
-
-    .stat {
-      padding: 18px;
-      background: rgba(10, 16, 29, 0.72);
-      border: 1px solid rgba(137, 211, 255, 0.12);
-      border-radius: 18px;
-      box-shadow: var(--glow);
-    }
-
-    .stat strong {
-      display: block;
-      font-size: 1.6rem;
-      margin-bottom: 8px;
-      color: #eff7ff;
-    }
-
-    .stat span {
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .hero-panel {
-      padding: 24px;
-      border-radius: 28px;
-      background: linear-gradient(180deg, rgba(11, 18, 30, 0.92), rgba(11, 18, 30, 0.72));
-      border: 1px solid rgba(137, 211, 255, 0.12);
-      box-shadow: var(--glow);
-    }
-
-    .hero-panel h3 {
-      margin: 0 0 14px;
-      font-size: 1.2rem;
-    }
-
-    .hero-panel p {
-      margin: 0 0 18px;
-      color: var(--muted);
-    }
-
-    .panel-list {
-      display: grid;
-      gap: 12px;
-      padding: 0;
-      margin: 0;
-      list-style: none;
-    }
-
-    .panel-list li {
-      padding: 14px 16px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px;
-      color: #d7e6f7;
-    }
-
-    section {
-      padding: 36px 0 84px;
-    }
-
-    .section-head {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 20px;
-      margin-bottom: 26px;
-    }
-
-    .section-head h2 {
-      margin: 0;
-      font-size: clamp(2rem, 4vw, 3rem);
-      letter-spacing: -0.03em;
-    }
-
-    .section-head p {
-      margin: 0;
-      max-width: 700px;
-      color: var(--muted);
-      font-size: 1.02rem;
-    }
-
-    .overview {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 22px;
-      margin-top: 14px;
-    }
-
-    .feature-large {
-      min-height: 440px;
-      padding: 34px;
-      border-radius: 28px;
-      background:
-        linear-gradient(180deg, rgba(12, 18, 31, 0.92), rgba(8, 13, 24, 0.9)),
-        radial-gradient(circle at 15% 85%, rgba(124, 198, 255, 0.16), transparent 22%);
-      border: 1px solid var(--line);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .feature-large::after {
-      content: "";
-      position: absolute;
-      inset: auto -5% -25% 5%;
-      height: 60%;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(147, 209, 255, 0.18), transparent 16%),
-        repeating-linear-gradient(115deg, rgba(137, 211, 255, 0.08) 0 2px, transparent 2px 34px);
-      filter: blur(0.4px);
-      opacity: 0.8;
-      transform: skewY(-8deg);
-    }
-
-    .feature-large h3 {
-      margin: 0 0 14px;
-      font-size: clamp(2.6rem, 6vw, 4.5rem);
-      font-weight: 300;
-      letter-spacing: -0.05em;
-      position: relative;
-      z-index: 1;
-    }
-
-    .feature-large p {
-      position: relative;
-      z-index: 1;
-      max-width: 430px;
-      margin: 0;
-      color: var(--muted);
-      font-size: 1.12rem;
-    }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0,1fr));
-      gap: 20px;
+    .section {
+      margin-top: 40px;
     }
 
     .card {
-      padding: 28px;
-      border-radius: 24px;
-      background: var(--panel);
-      border: 1px solid var(--line);
-      min-height: 220px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      box-shadow: var(--glow);
-    }
-
-    .icon {
-      width: 54px;
-      height: 54px;
-      border-radius: 16px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid rgba(137, 211, 255, 0.18);
-      background: rgba(137, 211, 255, 0.06);
-      color: var(--accent);
-      font-size: 1.4rem;
-      margin-bottom: 20px;
-    }
-
-    .card h4 {
-      margin: 0 0 12px;
-      font-size: 1.6rem;
-      letter-spacing: -0.03em;
-    }
-
-    .card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 1rem;
-    }
-
-    .divider {
-      width: 100%;
-      height: 4px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, rgba(137,211,255,0.32), rgba(255,255,255,0.02));
+      background: #111827;
+      padding: 20px;
+      border-radius: 10px;
       margin-top: 20px;
     }
 
-    .service-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0,1fr));
-      gap: 24px;
-    }
-
-    .service {
-      border-radius: 28px;
-      padding: 28px;
-      background: linear-gradient(180deg, rgba(11, 18, 30, 0.86), rgba(11, 18, 30, 0.95));
-      border: 1px solid var(--line);
-      box-shadow: var(--glow);
-    }
-
-    .service-number {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 42px;
-      height: 42px;
-      border-radius: 999px;
-      background: rgba(137, 211, 255, 0.1);
-      color: var(--accent);
-      font-weight: 700;
-      margin-bottom: 16px;
-    }
-
-    .service h3 {
-      margin: 0 0 18px;
-      font-size: 1.8rem;
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-    }
-
-    .split {
+    .grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 24px;
+      gap: 20px;
     }
 
-    .subcard {
-      padding: 22px;
-      border-radius: 20px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .subcard h4 {
-      margin: 0 0 14px;
-      color: #ebf4ff;
-      font-size: 1.02rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .subcard ul {
-      margin: 0;
-      padding-left: 18px;
-      color: var(--muted);
-    }
-
-    .subcard li + li { margin-top: 10px; }
-
-    .cta {
-      padding: 30px;
-      border-radius: 30px;
-      background:
-        linear-gradient(135deg, rgba(17, 28, 44, 0.98), rgba(9, 14, 25, 0.96));
-      border: 1px solid rgba(137, 211, 255, 0.16);
-      box-shadow: var(--glow);
-      display: grid;
-      grid-template-columns: 1.4fr 0.6fr;
-      gap: 24px;
-      align-items: center;
-    }
-
-    .cta h2 {
-      margin: 0 0 12px;
-      font-size: clamp(2rem, 4vw, 3rem);
-      letter-spacing: -0.03em;
-    }
-
-    .cta p {
-      margin: 0;
-      color: var(--muted);
-      max-width: 760px;
-      font-size: 1.06rem;
-    }
-
-    .cta-actions {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      align-items: stretch;
-    }
-
-    footer {
-      padding: 28px 0 40px;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      padding-top: 22px;
-    }
-
-    @media (max-width: 1080px) {
-      .hero-grid,
-      .overview,
-      .service-grid,
-      .cta,
-      .split {
+    @media (max-width: 768px) {
+      .grid {
         grid-template-columns: 1fr;
       }
     }
 
-    @media (max-width: 780px) {
-      .nav-inner {
-        flex-wrap: wrap;
-        padding: 14px 0;
-      }
-
-      .nav-links {
-        width: 100%;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 14px;
-      }
-
-      .hero {
-        padding-top: 72px;
-      }
-
-      .hero-stats,
-      .feature-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .service-grid { gap: 18px; }
-
-      .container {
-        width: min(var(--max), calc(100% - 24px));
-      }
-
-      .section-head {
-        align-items: start;
-        flex-direction: column;
-      }
-
-      .footer-inner {
-        flex-direction: column;
-      }
+    .footer {
+      text-align: center;
+      margin-top: 80px;
+      color: #888;
+      font-size: 0.9em;
     }
   </style>
 </head>
+
 <body>
-  <header class="nav">
-    <div class="container nav-inner">
-      <a class="brand" href="#top">
-        <span class="brand-mark">CDB BioAI</span>
-        <span class="brand-sub">Explainable biomedical intelligence</span>
-      </a>
-      <nav class="nav-links">
-        <a href="#platform">Platform</a>
-        <a href="#services">Services</a>
-        <a href="#impact">Impact</a>
-        <a href="#connect" class="nav-cta">Connect</a>
-      </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>Accelerating Biomedical Discovery with AI & Systems Modeling</h1>
+    <p>
+      Integrating machine learning, quantitative systems pharmacology, and biological data  
+      to generate actionable insights across drug discovery, clinical research, and precision medicine.
+    </p>
+  </div>
+
+  <div class="container">
+
+    <!-- SECTION 1 -->
+    <h2>1. Drug Discovery & Repurposing</h2>
+
+    <div class="grid">
+
+      <div class="card">
+        <h3>Challenges</h3>
+        <ul>
+          <li>High failure rates in drug development</li>
+          <li>Long timelines and escalating costs</li>
+          <li>Difficulty identifying novel therapeutic targets</li>
+          <li>Complex ADME and toxicity constraints</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Our Approach</h3>
+        <ul>
+          <li>Integrate multi-modal biological and clinical datasets</li>
+          <li>Combine mechanistic modeling with machine learning</li>
+          <li>Generate interpretable predictions for target prioritization</li>
+          <li>Identify repurposing opportunities through system-level insights</li>
+        </ul>
+      </div>
+
     </div>
-  </header>
 
-  <main id="top">
-    <section class="hero">
-      <div class="container hero-grid">
-        <div>
-          <div class="eyebrow">Explainable AI for Biomedicine</div>
-          <h1>Accelerate biomedical discovery with transparent, decision-ready intelligence.</h1>
-          <p class="lead">
-            We integrate biological knowledge, mechanistic reasoning, and AI-driven analysis to support drug discovery,
-            trial optimization, biomarker strategy, and translational decision-making.
-          </p>
-          <div class="hero-actions">
-            <a href="#services" class="btn btn-primary">Explore Solutions</a>
-            <a href="#connect" class="btn btn-secondary">Request a Discussion</a>
-          </div>
-          <div class="hero-stats">
-            <div class="stat">
-              <strong>Explainable</strong>
-              <span>Traceable outputs designed for scientific trust and better regulatory conversations.</span>
-            </div>
-            <div class="stat">
-              <strong>Connected</strong>
-              <span>Multi-source biological context across genetics, pathways, phenotypes, and treatment signals.</span>
-            </div>
-            <div class="stat">
-              <strong>Actionable</strong>
-              <span>Built to guide prioritization, cohort definition, biomarker strategy, and model refinement.</span>
-            </div>
-          </div>
-        </div>
+    <!-- SECTION 2 -->
+    <h2>2. Clinical Trial Optimization</h2>
 
-        <aside class="hero-panel">
-          <h3>Built for high-stakes biomedical decisions</h3>
-          <p>
-            Move beyond black-box predictions by combining explainable AI with disease biology, drug mechanisms, and
-            multimodal evidence.
-          </p>
-          <ul class="panel-list">
-            <li>Drug discovery and repurposing prioritization</li>
-            <li>Clinical trial cohort optimization</li>
-            <li>Biomarker and precision medicine strategy</li>
-            <li>Vaccine and immune response insight generation</li>
-          </ul>
-        </aside>
+    <div class="grid">
+
+      <div class="card">
+        <h3>Challenges</h3>
+        <ul>
+          <li>Patient recruitment inefficiencies</li>
+          <li>Heterogeneous treatment responses</li>
+          <li>Low statistical power in trials</li>
+          <li>High operational costs</li>
+        </ul>
       </div>
-    </section>
 
-    <section id="platform">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2>A platform philosophy built on explainability and biological context</h2>
-          </div>
-          <p>
-            Inspired by modern biomedical intelligence platforms, this landing page positions your work as a clear,
-            service-driven offering rather than a personal portfolio.
-          </p>
-        </div>
-
-        <div class="overview">
-          <div class="feature-large">
-            <h3>SPOKE-like intelligence</h3>
-            <p>
-              Connect fragmented biomedical signals into a usable layer for scientists, biotech teams, and translational
-              programs seeking trustworthy AI-assisted decisions.
-            </p>
-          </div>
-
-          <div class="feature-grid">
-            <article class="card">
-              <div>
-                <div class="icon">◎</div>
-                <h4>Explainable AI</h4>
-                <p>Transparent connections between features, pathways, disease mechanisms, and outputs for better scientific interpretation.</p>
-              </div>
-              <div class="divider"></div>
-            </article>
-
-            <article class="card">
-              <div>
-                <div class="icon">⌘</div>
-                <h4>Depth &amp; Breadth</h4>
-                <p>Integrate genetic, phenotypic, molecular, and clinical signals into a richer disease and treatment landscape.</p>
-              </div>
-              <div class="divider"></div>
-            </article>
-
-            <article class="card">
-              <div>
-                <div class="icon">◌</div>
-                <h4>Industry-Oriented</h4>
-                <p>Designed for translational relevance across drug programs, computational biology initiatives, and AI-enabled strategy.</p>
-              </div>
-              <div class="divider"></div>
-            </article>
-
-            <article class="card">
-              <div>
-                <div class="icon">⚡</div>
-                <h4>Curated Insight</h4>
-                <p>Use biological structure and expert-guided reasoning to reduce noise and improve decision confidence.</p>
-              </div>
-              <div class="divider"></div>
-            </article>
-          </div>
-        </div>
+      <div class="card">
+        <h3>Our Approach</h3>
+        <ul>
+          <li>Stratify patients using data-driven methods</li>
+          <li>Model disease progression and treatment response</li>
+          <li>Identify high-impact patient subgroups</li>
+          <li>Improve trial design and outcome predictability</li>
+        </ul>
       </div>
-    </section>
 
-    <section id="services">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2>Core solutions</h2>
-          </div>
-          <p>
-            A MateBio-style service section focused on concrete problems and how your platform or consulting layer helps solve them.
-          </p>
-        </div>
-
-        <div class="service-grid">
-          <article class="service">
-            <div class="service-number">1</div>
-            <h3>Accelerate Drug Discovery &amp; Repurposing with Explainable AI</h3>
-            <div class="split">
-              <div class="subcard">
-                <h4>Challenges</h4>
-                <ul>
-                  <li>High failure rates in drug development</li>
-                  <li>Long timelines and high R&amp;D costs</li>
-                  <li>Difficulty identifying novel drug targets</li>
-                  <li>ADME-Tox barriers in repurposing workflows</li>
-                </ul>
-              </div>
-              <div class="subcard">
-                <h4>How this helps</h4>
-                <ul>
-                  <li>Integrates diverse data for a holistic view of drug-disease relationships</li>
-                  <li>Refines AI-driven identification of repurposing and target opportunities</li>
-                  <li>Enables explainable outputs for decision-making and regulatory readiness</li>
-                  <li>Connects genetic alterations with disease pathways to prioritize novel targets</li>
-                </ul>
-              </div>
-            </div>
-          </article>
-
-          <article class="service">
-            <div class="service-number">2</div>
-            <h3>Optimize Clinical Trials with Precision</h3>
-            <div class="split">
-              <div class="subcard">
-                <h4>Challenges</h4>
-                <ul>
-                  <li>Difficulty identifying and recruiting suitable patients</li>
-                  <li>Long timelines and high trial costs</li>
-                  <li>Suboptimal cohort selection reducing statistical power</li>
-                </ul>
-              </div>
-              <div class="subcard">
-                <h4>How this helps</h4>
-                <ul>
-                  <li>Stratifies patients precisely using diverse biological and clinical data</li>
-                  <li>Identifies optimal cohorts to maximize effect sizes</li>
-                  <li>Improves trial design and increases probability of success</li>
-                </ul>
-              </div>
-            </div>
-          </article>
-
-          <article class="service">
-            <div class="service-number">3</div>
-            <h3>Advance Biomarker Discovery &amp; Precision Medicine</h3>
-            <div class="split">
-              <div class="subcard">
-                <h4>Challenges</h4>
-                <ul>
-                  <li>Identifying and validating reliable biomarkers</li>
-                  <li>Developing targeted therapies for defined patient populations</li>
-                  <li>Connecting biomarker signals with broader biomedical knowledge</li>
-                </ul>
-              </div>
-              <div class="subcard">
-                <h4>How this helps</h4>
-                <ul>
-                  <li>Uncovers hidden relationships between biomarkers, diseases, and interventions</li>
-                  <li>Supports AI-driven biomarker prioritization and treatment response prediction</li>
-                  <li>Provides a foundation for personalized therapies and diagnostic tools</li>
-                  <li>Maps biomarker signatures to disease progression across multimodal data layers</li>
-                </ul>
-              </div>
-            </div>
-          </article>
-
-          <article class="service">
-            <div class="service-number">4</div>
-            <h3>Enhance Vaccine Development</h3>
-            <div class="split">
-              <div class="subcard">
-                <h4>Challenges</h4>
-                <ul>
-                  <li>Analyzing complex biomedical and immune datasets</li>
-                  <li>Understanding immune response mechanisms</li>
-                  <li>Limited large-scale integration and pattern recognition across biological systems</li>
-                </ul>
-              </div>
-              <div class="subcard">
-                <h4>How this helps</h4>
-                <ul>
-                  <li>Integrates and analyzes multimodal datasets</li>
-                  <li>Reveals hidden patterns and biologically relevant mechanisms</li>
-                  <li>Improves graph-based computational models and downstream prioritization</li>
-                </ul>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="impact">
-      <div class="container">
-        <div class="cta">
-          <div>
-            <h2>Black-box AI is not enough for biomedicine.</h2>
-            <p>
-              Whether you position this as a consulting practice, translational AI platform, or scientific services brand,
-              this page now speaks in the language of real biomedical problems, explainable outputs, and solution-oriented value.
-            </p>
-          </div>
-          <div class="cta-actions" id="connect">
-            <a href="mailto:christian@example.com" class="btn btn-primary">Connect</a>
-            <a href="#top" class="btn btn-secondary">Back to top</a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container footer-inner">
-      <div>CDB BioAI</div>
-      <div>Explainable AI • Biomedical discovery • Translational intelligence</div>
     </div>
-  </footer>
+
+    <!-- SECTION 3 -->
+    <h2>3. Biomarker Discovery & Precision Medicine</h2>
+
+    <div class="grid">
+
+      <div class="card">
+        <h3>Challenges</h3>
+        <ul>
+          <li>Limited reliability of biomarkers</li>
+          <li>Difficulty linking molecular data to clinical outcomes</li>
+          <li>Fragmented biological datasets</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Our Approach</h3>
+        <ul>
+          <li>Identify patterns across genomic, proteomic, and clinical data</li>
+          <li>Map biomarkers to disease mechanisms</li>
+          <li>Predict treatment response using AI models</li>
+          <li>Enable personalized therapeutic strategies</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- SECTION 4 -->
+    <h2>4. Immunology & Vaccine Modeling</h2>
+
+    <div class="grid">
+
+      <div class="card">
+        <h3>Challenges</h3>
+        <ul>
+          <li>Complex immune system dynamics</li>
+          <li>High-dimensional biological data</li>
+          <li>Difficulty integrating multi-source datasets</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Our Approach</h3>
+        <ul>
+          <li>Use computational models to simulate immune responses</li>
+          <li>Integrate diverse biological datasets</li>
+          <li>Identify patterns across biological systems</li>
+          <li>Support next-generation vaccine design</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <p>CDB Scientific Consulting | AI × Biology × Medicine</p>
+    </div>
+
+  </div>
+
 </body>
+</html>
 </html>
