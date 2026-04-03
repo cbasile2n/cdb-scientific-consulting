@@ -413,4 +413,380 @@
     .subcard {
       padding: 22px;
       border-radius: 20px;
-      background: rgb
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .subcard h4 {
+      margin: 0 0 14px;
+      color: #ebf4ff;
+      font-size: 1.02rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .subcard ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .subcard li + li { margin-top: 10px; }
+
+    .cta {
+      padding: 30px;
+      border-radius: 30px;
+      background:
+        linear-gradient(135deg, rgba(17, 28, 44, 0.98), rgba(9, 14, 25, 0.96));
+      border: 1px solid rgba(137, 211, 255, 0.16);
+      box-shadow: var(--glow);
+      display: grid;
+      grid-template-columns: 1.4fr 0.6fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .cta h2 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -0.03em;
+    }
+
+    .cta p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 760px;
+      font-size: 1.06rem;
+    }
+
+    .cta-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    footer {
+      padding: 28px 0 40px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 22px;
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .overview,
+      .service-grid,
+      .cta,
+      .split {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 780px) {
+      .nav-inner {
+        flex-wrap: wrap;
+        padding: 14px 0;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+
+      .hero {
+        padding-top: 72px;
+      }
+
+      .hero-stats,
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .service-grid { gap: 18px; }
+
+      .container {
+        width: min(var(--max), calc(100% - 24px));
+      }
+
+      .section-head {
+        align-items: start;
+        flex-direction: column;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#top">
+        <span class="brand-mark">CDB BioAI</span>
+        <span class="brand-sub">Explainable biomedical intelligence</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#platform">Platform</a>
+        <a href="#services">Services</a>
+        <a href="#impact">Impact</a>
+        <a href="#connect" class="nav-cta">Connect</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Explainable AI for Biomedicine</div>
+          <h1>Accelerate biomedical discovery with transparent, decision-ready intelligence.</h1>
+          <p class="lead">
+            We integrate biological knowledge, mechanistic reasoning, and AI-driven analysis to support drug discovery,
+            trial optimization, biomarker strategy, and translational decision-making.
+          </p>
+          <div class="hero-actions">
+            <a href="#services" class="btn btn-primary">Explore Solutions</a>
+            <a href="#connect" class="btn btn-secondary">Request a Discussion</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat">
+              <strong>Explainable</strong>
+              <span>Traceable outputs designed for scientific trust and better regulatory conversations.</span>
+            </div>
+            <div class="stat">
+              <strong>Connected</strong>
+              <span>Multi-source biological context across genetics, pathways, phenotypes, and treatment signals.</span>
+            </div>
+            <div class="stat">
+              <strong>Actionable</strong>
+              <span>Built to guide prioritization, cohort definition, biomarker strategy, and model refinement.</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="hero-panel">
+          <h3>Built for high-stakes biomedical decisions</h3>
+          <p>
+            Move beyond black-box predictions by combining explainable AI with disease biology, drug mechanisms, and
+            multimodal evidence.
+          </p>
+          <ul class="panel-list">
+            <li>Drug discovery and repurposing prioritization</li>
+            <li>Clinical trial cohort optimization</li>
+            <li>Biomarker and precision medicine strategy</li>
+            <li>Vaccine and immune response insight generation</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section id="platform">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>A platform philosophy built on explainability and biological context</h2>
+          </div>
+          <p>
+            Inspired by modern biomedical intelligence platforms, this landing page positions your work as a clear,
+            service-driven offering rather than a personal portfolio.
+          </p>
+        </div>
+
+        <div class="overview">
+          <div class="feature-large">
+            <h3>SPOKE-like intelligence</h3>
+            <p>
+              Connect fragmented biomedical signals into a usable layer for scientists, biotech teams, and translational
+              programs seeking trustworthy AI-assisted decisions.
+            </p>
+          </div>
+
+          <div class="feature-grid">
+            <article class="card">
+              <div>
+                <div class="icon">◎</div>
+                <h4>Explainable AI</h4>
+                <p>Transparent connections between features, pathways, disease mechanisms, and outputs for better scientific interpretation.</p>
+              </div>
+              <div class="divider"></div>
+            </article>
+
+            <article class="card">
+              <div>
+                <div class="icon">⌘</div>
+                <h4>Depth &amp; Breadth</h4>
+                <p>Integrate genetic, phenotypic, molecular, and clinical signals into a richer disease and treatment landscape.</p>
+              </div>
+              <div class="divider"></div>
+            </article>
+
+            <article class="card">
+              <div>
+                <div class="icon">◌</div>
+                <h4>Industry-Oriented</h4>
+                <p>Designed for translational relevance across drug programs, computational biology initiatives, and AI-enabled strategy.</p>
+              </div>
+              <div class="divider"></div>
+            </article>
+
+            <article class="card">
+              <div>
+                <div class="icon">⚡</div>
+                <h4>Curated Insight</h4>
+                <p>Use biological structure and expert-guided reasoning to reduce noise and improve decision confidence.</p>
+              </div>
+              <div class="divider"></div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Core solutions</h2>
+          </div>
+          <p>
+            A MateBio-style service section focused on concrete problems and how your platform or consulting layer helps solve them.
+          </p>
+        </div>
+
+        <div class="service-grid">
+          <article class="service">
+            <div class="service-number">1</div>
+            <h3>Accelerate Drug Discovery &amp; Repurposing with Explainable AI</h3>
+            <div class="split">
+              <div class="subcard">
+                <h4>Challenges</h4>
+                <ul>
+                  <li>High failure rates in drug development</li>
+                  <li>Long timelines and high R&amp;D costs</li>
+                  <li>Difficulty identifying novel drug targets</li>
+                  <li>ADME-Tox barriers in repurposing workflows</li>
+                </ul>
+              </div>
+              <div class="subcard">
+                <h4>How this helps</h4>
+                <ul>
+                  <li>Integrates diverse data for a holistic view of drug-disease relationships</li>
+                  <li>Refines AI-driven identification of repurposing and target opportunities</li>
+                  <li>Enables explainable outputs for decision-making and regulatory readiness</li>
+                  <li>Connects genetic alterations with disease pathways to prioritize novel targets</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="service">
+            <div class="service-number">2</div>
+            <h3>Optimize Clinical Trials with Precision</h3>
+            <div class="split">
+              <div class="subcard">
+                <h4>Challenges</h4>
+                <ul>
+                  <li>Difficulty identifying and recruiting suitable patients</li>
+                  <li>Long timelines and high trial costs</li>
+                  <li>Suboptimal cohort selection reducing statistical power</li>
+                </ul>
+              </div>
+              <div class="subcard">
+                <h4>How this helps</h4>
+                <ul>
+                  <li>Stratifies patients precisely using diverse biological and clinical data</li>
+                  <li>Identifies optimal cohorts to maximize effect sizes</li>
+                  <li>Improves trial design and increases probability of success</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="service">
+            <div class="service-number">3</div>
+            <h3>Advance Biomarker Discovery &amp; Precision Medicine</h3>
+            <div class="split">
+              <div class="subcard">
+                <h4>Challenges</h4>
+                <ul>
+                  <li>Identifying and validating reliable biomarkers</li>
+                  <li>Developing targeted therapies for defined patient populations</li>
+                  <li>Connecting biomarker signals with broader biomedical knowledge</li>
+                </ul>
+              </div>
+              <div class="subcard">
+                <h4>How this helps</h4>
+                <ul>
+                  <li>Uncovers hidden relationships between biomarkers, diseases, and interventions</li>
+                  <li>Supports AI-driven biomarker prioritization and treatment response prediction</li>
+                  <li>Provides a foundation for personalized therapies and diagnostic tools</li>
+                  <li>Maps biomarker signatures to disease progression across multimodal data layers</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="service">
+            <div class="service-number">4</div>
+            <h3>Enhance Vaccine Development</h3>
+            <div class="split">
+              <div class="subcard">
+                <h4>Challenges</h4>
+                <ul>
+                  <li>Analyzing complex biomedical and immune datasets</li>
+                  <li>Understanding immune response mechanisms</li>
+                  <li>Limited large-scale integration and pattern recognition across biological systems</li>
+                </ul>
+              </div>
+              <div class="subcard">
+                <h4>How this helps</h4>
+                <ul>
+                  <li>Integrates and analyzes multimodal datasets</li>
+                  <li>Reveals hidden patterns and biologically relevant mechanisms</li>
+                  <li>Improves graph-based computational models and downstream prioritization</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="impact">
+      <div class="container">
+        <div class="cta">
+          <div>
+            <h2>Black-box AI is not enough for biomedicine.</h2>
+            <p>
+              Whether you position this as a consulting practice, translational AI platform, or scientific services brand,
+              this page now speaks in the language of real biomedical problems, explainable outputs, and solution-oriented value.
+            </p>
+          </div>
+          <div class="cta-actions" id="connect">
+            <a href="mailto:christian@example.com" class="btn btn-primary">Connect</a>
+            <a href="#top" class="btn btn-secondary">Back to top</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>CDB BioAI</div>
+      <div>Explainable AI • Biomedical discovery • Translational intelligence</div>
+    </div>
+  </footer>
+</body>
+</html>
